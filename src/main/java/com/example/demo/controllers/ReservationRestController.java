@@ -10,7 +10,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.dto.ReservationUpdateRequest;
+import com.example.demo.entities.Passenger;
 import com.example.demo.entities.Reservation;
+import com.example.demo.repos.PassengerRepository;
 import com.example.demo.repos.ReservationRepository;
 
 @RestController
@@ -19,6 +21,9 @@ public class ReservationRestController {
 	
 	@Autowired
 	ReservationRepository reservationRepository;
+	
+	@Autowired
+	PassengerRepository passengerRepository;
 	
 	@RequestMapping("reservations/{id}")
 	public Optional<Reservation> findReservation(@PathVariable("id") Long id) {
@@ -35,4 +40,11 @@ public class ReservationRestController {
 		return null;
 		
 	}
+	
+	@RequestMapping("passengers/{id}")
+	public Optional<Passenger> findPassenger(@PathVariable("id") Long id) {
+		return passengerRepository.findById(id);
+		
+	}
+	
 }
